@@ -10,7 +10,8 @@ public class BIRDSEYEmove : MonoBehaviour
     private float playerSpeed = 0.1f;
 
     private Vector2 direction;
-    
+
+    private bool canMove = true;
     private int spriteNum = 2;
 
     private Rigidbody2D rb;
@@ -73,8 +74,13 @@ public class BIRDSEYEmove : MonoBehaviour
                 break;
         }
 
-        rb.position += direction * playerSpeed;
-        direction = Vector2.zero;
+        if (canMove) {
+            rb.position += direction * playerSpeed;
+            direction = Vector2.zero;
+        }
+
+        
     }
 
+    
 }
