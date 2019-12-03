@@ -17,7 +17,7 @@ public class BEAttackMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         attackCollider = GetComponent<Collider2D>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
         playerSprite = player.GetComponent<SpriteRenderer>().sprite;
 
         AnimateAttack();
@@ -61,14 +61,16 @@ public class BEAttackMovement : MonoBehaviour
 
 
     // when a collision happens, looks through EnemyList array to see if it hit an enemy
-    // if it was, deletes both laser and enemy
+    // if it was, deletes enemy. laser is deleted upon any collision
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        foreach (string enemyName in EnemyList) {
-            if (coll.gameObject.name == enemyName) {
-                Destroy(coll.gameObject);
-                Destroy(gameObject);
+        if (!coll.gameObject.CompareTag("Player")) {
+            foreach (string enemyName in EnemyList) {
+                if (coll.gameObject.name == enemyName) {
+                    Destroy(coll.gameObject);
+                }
             }
+            Destroy(gameObject);
         }
     }
 

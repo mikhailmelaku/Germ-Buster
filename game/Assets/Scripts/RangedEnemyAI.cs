@@ -48,7 +48,7 @@ public class RangedEnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -92,7 +92,6 @@ public class RangedEnemyAI : MonoBehaviour
         distance = CartesianDistance(playerPosition, rb.position);
         withinFiringRange = proximityRadius > distance;
 
-        //TODO: ideally enter some wait function here to delay the enemy
     }
 
     //just the distance formula

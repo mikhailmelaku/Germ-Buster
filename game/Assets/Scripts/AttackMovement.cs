@@ -26,7 +26,7 @@ public class AttackMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
+        player = GameObject.FindWithTag("Player");
         //FIXME: trying to use trig
         //direction = new Vector2(1, transform.rotation.z) * attackSpeed;
 
