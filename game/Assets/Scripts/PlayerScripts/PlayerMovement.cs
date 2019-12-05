@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.name == "Ground") {
+        if (coll.gameObject.CompareTag("Ground")) {
             jumpsLeft = numJumps;
         }
     }

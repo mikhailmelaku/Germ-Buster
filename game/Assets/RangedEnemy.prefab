@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7339119090835023679}
   - component: {fileID: -8026373351797027893}
   - component: {fileID: -442487298414918788}
+  - component: {fileID: 3410248453380897088}
   m_Layer: 0
   m_Name: RangedEnemy
   m_TagString: Untagged
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &3410248453380897088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2891416713976793504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2dd3a7e6d001467290ffeb81f443175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numShots: 1
+  speed: 0.05
+  proximityRadius: 5
+  attack: {fileID: 223198163232006417, guid: b3c362dd506874c89b4d708933c8a076, type: 3}

@@ -11,6 +11,9 @@ TextureImporter:
   - first:
       213: 6212690799927659784
     second: BETileset_2
+  - first:
+      213: -8280297625826790517
+    second: BETileset_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -40,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
+    filterMode: 0
     aniso: -1
     mipBias: -100
     wrapU: 1
@@ -72,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -84,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,7 +112,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25e9861682ce846e68f05155205ae697
+      spriteID: a657d57946fbd40a98c34e49f3cd71fa
       internalID: -2823814196679881761
       vertices: []
       indices: 
@@ -117,6 +120,27 @@ TextureImporter:
       weights: []
     - serializedVersion: 2
       name: BETileset_1
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37dfa306712ed413d81e682a2fe99e6e
+      internalID: 493832072213906959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BETileset_2
       rect:
         serializedVersion: 2
         x: 0
@@ -130,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28579db5ea4354e10b464f8e095a0d3e
-      internalID: 493832072213906959
+      spriteID: a3de08eb5941e4b43b4c122c167a8cbb
+      internalID: 6212690799927659784
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BETileset_2
+      name: BETileset_3
       rect:
         serializedVersion: 2
         x: 128
@@ -151,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6b925a6d0f6264ea7b364ed2a3a286da
-      internalID: 6212690799927659784
+      spriteID: df023c3abdbef4fd5bd41c32f6b405a0
+      internalID: -8280297625826790517
       vertices: []
       indices: 
       edges: []

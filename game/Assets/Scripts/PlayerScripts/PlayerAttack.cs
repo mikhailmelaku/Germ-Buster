@@ -36,7 +36,7 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetButtonDown("Fire3") && !cooldown) // Press Left Shift
         {
             cooldown = true;
-            Instantiate(attack, transform.position, transform.rotation);
+            Instantiate(attack, transform.position + Vector3.right, transform.rotation);
 
             Invoke("ResetCooldown", cooldownTimer);
         }

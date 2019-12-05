@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 400df9ec69571479bb35bf788c4d0515
+guid: bf19ce1142dfd48ff924c53e6f631813
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8877945127707248134
-    second: RangedEnemySpriteSheet_0
+      213: -11752150133905273
+    second: BETileset2_0
   - first:
-      213: 2229633520635925263
-    second: RangedEnemySpriteSheet_1
+      213: 1449545305966347858
+    second: BETileset2_1
   - first:
-      213: 2002238610173172643
-    second: RangedEnemySpriteSheet_2
+      213: 191412818934270362
+    second: BETileset2_2
   - first:
-      213: -6235085377887640290
-    second: RangedEnemySpriteSheet_3
+      213: 6211980509342693113
+    second: BETileset2_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -98,7 +98,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RangedEnemySpriteSheet_0
+      name: BETileset2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,14 +112,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 926d663d4ae724ab4995edb466558e0b
-      internalID: -8877945127707248134
+      spriteID: 6e2ada711ac864253ae3b64ae36fba13
+      internalID: -11752150133905273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RangedEnemySpriteSheet_1
+      name: BETileset2_1
       rect:
         serializedVersion: 2
         x: 128
@@ -133,14 +133,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40dbae8dd23a646a18144b59212bbae1
-      internalID: 2229633520635925263
+      spriteID: 0d54c78cac6964efcbacbe2a4fd869b4
+      internalID: 1449545305966347858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RangedEnemySpriteSheet_2
+      name: BETileset2_2
       rect:
         serializedVersion: 2
         x: 0
@@ -154,14 +154,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8af0c3f8ce84349789dd1856636bd724
-      internalID: 2002238610173172643
+      spriteID: 860f0a5459752481daf50e9cdc0e4078
+      internalID: 191412818934270362
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RangedEnemySpriteSheet_3
+      name: BETileset2_3
       rect:
         serializedVersion: 2
         x: 128
@@ -175,8 +175,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 998b3f3e91a314a2ba0c101d9a523de0
-      internalID: -6235085377887640290
+      spriteID: 85d299fe603a24e1881f0b155083c1bc
+      internalID: 6211980509342693113
       vertices: []
       indices: 
       edges: []
