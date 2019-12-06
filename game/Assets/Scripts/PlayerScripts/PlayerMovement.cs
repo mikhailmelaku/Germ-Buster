@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    private SpriteRenderer sr;
     private Rigidbody2D rb;
 
     [SerializeField]
@@ -19,45 +19,69 @@ public class PlayerMovement : MonoBehaviour
 
     private int jumpsLeft;
     private Vector2 direction;
-    
+
+    [SerializeField]
+    private Sprite leftSprite;
+    [SerializeField]
+    private Sprite rightSprite;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
         jumpsLeft = numJumps;
     }
     
     // Update is called once per frame
+    void Update() {
+        GetMovementInput();
+    }
+
     void FixedUpdate()
     {
-        GetMovementInput();
         Move();
     }
 
     private void GetMovementInput()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
-        
+
+        if (direction.x < 0) {
+            sr.sprite = leftSprite;
+        }
+        else if (direction.x > 0) {
+            sr.sprite = rightSprite;
+        }
     }
 
     private void Move()
     {
         // moves left to right
         rb.position += direction * speed;
-        direction = Vector2.zero;
 
         // does a jump
+        if (Input.GetKeyDown(KeyCode.W) && jumpsLeft > 0) {
+            rb.velocity = Vector2.up * jumpHeight;
+            jumpsLeft--;
+        }
+
+        /*
         if (Input.GetKeyDown(KeyCode.W) && jumpsLeft != 0) {
             jumpsLeft--;
             rb.velocity = new Vector2(0, jumpHeight);
         }
+        
+        if (Input.GetKeyDown(KeyCode.D) && jumpsLeft < 2) {
+            rb.velocity = new Vector2(0, fastFallSpeed);
+        }
+        */
+
+
     }
 
-    void OnCollisionEnter2D(Collision2D coll) {
-        if (coll.gameObject.CompareTag("Ground")) {
-            jumpsLeft = numJumps;
-        }
+    void OnTriggerEnter2D(Collider2D coll) {
+        jumpsLeft = numJumps;
     }
 }

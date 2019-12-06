@@ -4,20 +4,17 @@ using UnityEngine;
  
 [RequireComponent(typeof(Rigidbody2D))]
 
-// note : gonna break if player is named anything other than "Player"
-
-
 public class AttackMovement : MonoBehaviour
 {
 
-    public GameObject player;
-
+    private GameObject player;
+    
     
     public static float attackDuration = 1.0f;
 
-   
     public static float attackSpeed = 10.0f;
 
+    private string[] EnemyList = { "RangedEnemy", "Enemy" };
     private Rigidbody2D rb;
     
     private Vector2 direction;
@@ -25,17 +22,20 @@ public class AttackMovement : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
-        //FIXME: trying to use trig
-        //direction = new Vector2(1, transform.rotation.z) * attackSpeed;
 
-        float playerAngle = player.transform.eulerAngles.z;
-        playerAngle *= Mathf.PI / 180;     //conversion into radians
-        direction = new Vector2(Mathf.Cos(playerAngle), Mathf.Sin(playerAngle))
-                    * attackSpeed;
+        switch (player.GetComponent<SpriteRenderer>().sprite.name) {
+            case "PlayerSpriteSheet_0":
+                direction = Vector2.left;
+                break;
+            default:
+                direction = Vector2.right;
+                break;
+        }
 
-        rb.velocity = direction;
+        rb.velocity = direction * attackSpeed;
         DestroyAttack(attackDuration);
     }
 
@@ -49,4 +49,17 @@ public class AttackMovement : MonoBehaviour
     {
         Destroy(gameObject, delay);
     }
+
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (!coll.gameObject.CompareTag("Player")) {
+            foreach (string enemyName in EnemyList) {
+                if (coll.gameObject.name == enemyName) {
+                    Destroy(coll.gameObject);
+                }
+            }
+            Destroy(gameObject);
+        }
+    }
+
 }

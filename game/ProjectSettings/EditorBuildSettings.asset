@@ -12,12 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/TitleScreen.unity
     guid: 237f1e08cc43c47b5a34f65420222796
   - enabled: 1
-    path: Assets/Scenes/BirdsEye.unity
+    path: Assets/Scenes/StomachLevel.unity
     guid: 8fe4d220199ca47578671adaa56a6c5a
   - enabled: 1
     path: Assets/Scenes/BeginningCutscene.unity
     guid: 31878c4f95c0c4e79807efe42df9e35b
   - enabled: 1
     path: Assets/Scenes/Level1.unity
-    guid: 6b78d17ca0cc14a068f3eb1cd4e292f8
+    guid: d785148287b7a428b927d463b0b9e8b8
   m_configObjects: {}

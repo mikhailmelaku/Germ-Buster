@@ -9,7 +9,7 @@ public class BIRDSEYEattack : MonoBehaviour
 
     private SpriteRenderer playerSpriteRenderer;
     private Rigidbody2D rb;
-
+    
     private Vector2 spawnOffset = Vector2.zero;
     //stores the distance infront of player that attack will spawn at
 
@@ -28,6 +28,7 @@ public class BIRDSEYEattack : MonoBehaviour
     {
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     // Update is called once per frame
@@ -64,6 +65,11 @@ public class BIRDSEYEattack : MonoBehaviour
 
             Invoke("ResetCooldown", PlayerAttack.cooldownTimer);
         }
+
+        if (Input.GetKeyDown(KeyCode.P)) {
+            GameObject.Find("PauseGUI").GetComponent<PauseMenu>().PauseGame();
+        }
+
     }
 
     private void ResetCooldown() {
