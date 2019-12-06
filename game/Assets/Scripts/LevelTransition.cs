@@ -7,10 +7,7 @@ public class LevelTransition : MonoBehaviour
     public GameObject GUI;
 
     void OnTriggerEnter2D(Collider2D coll) {
-        if (coll.CompareTag("Player")) {
-
-            Debug.Log("Contact detected");
+        if (coll.CompareTag("Player")) 
             GUI.GetComponent<GUIController>().Transition();
-        }
     }
 }

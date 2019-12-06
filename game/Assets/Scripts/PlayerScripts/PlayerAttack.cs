@@ -40,7 +40,12 @@ public class PlayerAttack : MonoBehaviour
 
             Invoke("ResetCooldown", cooldownTimer);
         }
-   
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameObject.Find("GUI").GetComponent<PauseMenu>().PauseGame();
+        }
+
     }
 
     private void ResetCooldown()
