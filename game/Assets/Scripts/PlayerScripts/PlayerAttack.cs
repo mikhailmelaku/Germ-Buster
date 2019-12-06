@@ -14,14 +14,16 @@ public class PlayerAttack : MonoBehaviour
 
     private bool cooldown; // implicit initializiation to false
 
+    private Vector3 spawnOffset = Vector3.right;
 
     public static float cooldownTimer = 0.5f;
 
-   
+    private SpriteRenderer sr;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -36,7 +38,17 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetButtonDown("Fire3") && !cooldown) // Press Left Shift
         {
             cooldown = true;
-            Instantiate(attack, transform.position + Vector3.right, transform.rotation);
+
+            switch (sr.sprite.name) {
+                case "PlayerSpriteSheet_0":
+                    spawnOffset = Vector3.left;
+                    break;
+                default:
+                    spawnOffset = Vector3.right;
+                    break;
+            }
+
+            Instantiate(attack, transform.position + spawnOffset, transform.rotation);
 
             Invoke("ResetCooldown", cooldownTimer);
         }
