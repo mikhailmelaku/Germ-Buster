@@ -55,7 +55,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameObject.Find("GUI").GetComponent<PauseMenu>().PauseGame();
+            GameObject.Find("PauseGUI").GetComponent<PauseMenu>().PauseGame();
         }
 
     }

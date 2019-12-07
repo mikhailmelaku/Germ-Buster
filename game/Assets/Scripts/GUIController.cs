@@ -10,12 +10,14 @@ public class GUIController : MonoBehaviour
 
     public GameObject healthbar;
     public Image healthbarImage;
-    public float healthPercent = 100f;
+    public float health = 100f; // player health
 
     public GameObject transitionScreen;
     public Image transitionScreenImage;
     private float transitionSeconds = 3f;
     private bool transitionCompleted;
+
+
     public void DamageAnimation() {
         // finds the objects it needs to act on (healthbar in this case)
         interfaceDisplay = GameObject.Find("GUI");
@@ -29,7 +31,7 @@ public class GUIController : MonoBehaviour
             healthbarImage.color = tempColor;
         }
         
-        healthbarImage.GetComponent<RectTransform>().position += new Vector3(0, 10f, 0);
+        Debug.Log("health is: " + health);
         
     }
 

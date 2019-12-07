@@ -7,68 +7,49 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField]
     private float speed = 0.05f; // enemy's movement speed
-    [SerializeField]
-    private float knockback = 1.0f; // determines how far the enemy knocks the player back
+    private float vision = 5f;  // how close you need to be for enemy to see you
+    private float knockback = 5f; // how hard the enemy hits
 
-    private bool touching; // prevents enemy from moving if its touching the player
-
-    private Vector2 playerPosition;
-    private Rigidbody2D rb;
     private Rigidbody2D playerRb;
-    private Collider2D playerCollider;
+    private Rigidbody2D rb;
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-        rb = GetComponent<Rigidbody2D>();
-        playerCollider = GameObject.Find("Player").GetComponent<Collider2D>();
-        touching = playerCollider.IsTouching(GetComponent<Collider2D>());
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        UpdateTrajectory();
         MoveIn();
-        MeleeAttack();
     }
 
-    private void MoveIn()
-    {
+    private void MoveIn() {
+        if (!rb.IsTouching(playerRb.GetComponent<BoxCollider2D>())) {
+            if (Mathf.Abs(rb.position.x - playerRb.position.x) <= vision) {
+                rb.position +=
+                    (playerRb.position - rb.position).normalized * speed;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll) {
         
-        if (!touching)
-        {
-            // make vector point towards the player and apply that to position
+        if (coll.gameObject.CompareTag("Player")) {
+            // knockback effect
+            Vector2 direction = rb.position.x > playerRb.position.x ? Vector2.left : Vector2.right;
+            playerRb.AddForce(direction * knockback, ForceMode2D.Impulse);
 
-            rb.position +=
-                (playerPosition - rb.position).normalized * speed;
-       
+            // deals damage FIXME: dont allow it to go into negatives
+            GameObject.Find("GUI").GetComponent<GUIController>().health -= 10f;
+            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation();
         }
 
+        
     }
 
-    private void UpdateTrajectory()
-    {
-        if (!touching) {
-            playerPosition = playerRb.position;
-        }
-    }
-
-    private void MeleeAttack() {
-        if (touching) {
-            playerRb.AddForce(Vector2.left);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D coll)
-    {
-        touching = coll.gameObject.name == "Player";
-    }
-
-    private void OnCollisionExit2D(Collision2D coll)
-    {
-        touching = false;
-    }
 }
