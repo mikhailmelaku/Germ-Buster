@@ -52,12 +52,10 @@ public class AttackMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (!coll.gameObject.CompareTag("Player")) {
-            foreach (string enemyName in EnemyList) {
-                if (coll.gameObject.name == enemyName) {
-                    Destroy(coll.gameObject);
-                }
-            }
+        if (coll.gameObject.CompareTag("Enemy")) {
+    
+            Destroy(coll.gameObject);
+
             Destroy(gameObject);
         }
     }

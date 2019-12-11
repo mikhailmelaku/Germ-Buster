@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    private const float DISTANCE_TO_CAMERA_EDGE = 14f;
 
     [SerializeField]
     private float speed = 0.05f; // enemy's movement speed
-    private float vision = 5f;  // how close you need to be for enemy to see you
+    private float vision = DISTANCE_TO_CAMERA_EDGE;
     private float knockback = 5f; // how hard the enemy hits
+    private float distance;
 
     private Rigidbody2D playerRb;
     private Rigidbody2D rb;
+    private SpriteRenderer sr;
 
+    [SerializeField]
+    private Sprite leftSprite;
+    [SerializeField]
+    private Sprite rightSprite;
 
+    // used to update sprite
+    private float pastPos;
+    private float currentPos;
     // Start is called before the first frame update
     void Awake()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
 
     }
 
@@ -30,7 +41,18 @@ public class EnemyAI : MonoBehaviour
 
     private void MoveIn() {
         if (!rb.IsTouching(playerRb.GetComponent<BoxCollider2D>())) {
-            if (Mathf.Abs(rb.position.x - playerRb.position.x) <= vision) {
+            distance = Mathf.Abs(rb.position.x - playerRb.position.x);
+            if (distance <= vision) {
+                distance = rb.position.x - playerRb.position.x;
+                // update sprite to look left/right
+                if (distance < 0) {
+                    sr.sprite = rightSprite;
+                }
+                else {
+                    sr.sprite = leftSprite;
+                }
+
+                // move
                 rb.position +=
                     (playerRb.position - rb.position).normalized * speed;
             }
@@ -51,5 +73,7 @@ public class EnemyAI : MonoBehaviour
 
         
     }
+
+  
 
 }
