@@ -5,17 +5,7 @@ using UnityEngine;
 
 public class RangedEnemyAI : MonoBehaviour
 {
-    /* plan for enemy behavior:
-     * 1. scerw it down wait
-     * 2. get player position, if bool firing is false, will go towards the
-     * player by using update function to move towards the player's constantly
-     * updating position
-     * 3. once enemy gets close enough (distance < some threshold) fires projectiles
-     * during this firing stage, firing is true.  this prevents movement function in update
-     * from triggering while enemy is firing
-     * 4. once player leaves a certain radius around the enemy (distance becomes > the threshold)
-     * the enemy goes back to top
-     */
+    
 
     [SerializeField]
     private const float fireRate = 1.0f;

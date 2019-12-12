@@ -14,7 +14,6 @@ public class AttackMovement : MonoBehaviour
 
     public static float attackSpeed = 10.0f;
 
-    private string[] EnemyList = { "RangedEnemy", "Enemy" };
     private Rigidbody2D rb;
     
     private Vector2 direction;
@@ -53,10 +52,11 @@ public class AttackMovement : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.CompareTag("Enemy")) {
-    
             Destroy(coll.gameObject);
+        }
 
-            Destroy(gameObject);
+        if (!coll.gameObject.CompareTag("Player")) {
+        Destroy(gameObject);
         }
     }
 

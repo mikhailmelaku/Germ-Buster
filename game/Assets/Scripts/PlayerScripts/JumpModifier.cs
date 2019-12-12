@@ -21,6 +21,8 @@ public class JumpModifier : MonoBehaviour
 
 
     void FixedUpdate() {
+
+        // tapping jump gives you a smaller jump, holding gives you a bigger one
         /*
         if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
