@@ -14,10 +14,9 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 0.1f;
     [SerializeField]
     private float jumpHeight = 1.0f;
-    [SerializeField]
-    readonly private int numJumps = 2;
 
-    private int jumpsLeft;
+    private bool canDoubleJump;
+    private bool grounded = true;
     private Vector2 direction;
 
     [SerializeField]
@@ -31,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        jumpsLeft = numJumps;
     }
     
     // Update is called once per frame
@@ -58,13 +56,22 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move()
     {
+        if (grounded) {
+            canDoubleJump = true;
+        }
+
         // moves left to right
         rb.position += direction * speed;
 
         // does a jump
-        if (Input.GetKeyDown(KeyCode.W) && jumpsLeft > 0) {
-            rb.velocity = Vector2.up * jumpHeight;
-            jumpsLeft--;
+        if (Input.GetKeyDown(KeyCode.W)) {
+            if (grounded) {
+                rb.velocity = Vector2.up * jumpHeight;
+            }
+            else if (canDoubleJump) {
+                canDoubleJump = false;
+                rb.velocity = Vector2.up * jumpHeight;
+            }
         }
 
         /*
@@ -81,7 +88,12 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+
+    void OnTriggerExit2D(Collider2D coll) {
+        grounded = false;
+    }
+
     void OnTriggerEnter2D(Collider2D coll) {
-        jumpsLeft = numJumps;
+        grounded = true;
     }
 }
