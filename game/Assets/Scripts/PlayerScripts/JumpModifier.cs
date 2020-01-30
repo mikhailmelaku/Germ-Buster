@@ -20,7 +20,7 @@ public class JumpModifier : MonoBehaviour
     }
 
 
-    void FixedUpdate() {
+    void Update() {
 
         // tapping jump gives you a smaller jump, holding gives you a bigger one
         /*

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool canDoubleJump;
     private bool grounded = true;
+    private bool jumpInputted;
     private Vector2 direction;
 
     [SerializeField]
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update() {
         GetMovementInput();
+        //Move();
     }
 
     void FixedUpdate()
@@ -45,6 +47,10 @@ public class PlayerMovement : MonoBehaviour
     private void GetMovementInput()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+
+        if (Input.GetKeyDown(KeyCode.W)) {
+            jumpInputted = true;
+        }
 
         if (direction.x < 0) {
             sr.sprite = leftSprite;
@@ -64,7 +70,8 @@ public class PlayerMovement : MonoBehaviour
         rb.position += direction * speed;
 
         // does a jump
-        if (Input.GetKeyDown(KeyCode.W)) {
+        if (jumpInputted) {
+            jumpInputted = false;
             if (grounded) {
                 rb.velocity = Vector2.up * jumpHeight;
             }
