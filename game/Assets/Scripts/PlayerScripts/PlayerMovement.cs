@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         
-        if (Input.GetKey(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S) && grounded) {
             crouching = true;
 
             if (sr.sprite == leftSprite) {
