@@ -15,6 +15,8 @@ public class EnemyLaserMovement : MonoBehaviour
     private float attackSpeed = 1.25f;
     [SerializeField]
     private float attackDuration = 1.5f; // attack duartion in seconds
+    [SerializeField]
+    private float damage = 5f;
 
     // Start is called before the first frame update
     void Start()

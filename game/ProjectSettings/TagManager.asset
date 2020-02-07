@@ -9,6 +9,7 @@ TagManager:
   - Projectile
   - Attack
   - Camera
+  - Hostile
   layers:
   - Default
   - TransparentFX

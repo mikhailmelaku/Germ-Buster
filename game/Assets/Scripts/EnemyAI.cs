@@ -66,7 +66,7 @@ public class EnemyAI : MonoBehaviour
             Vector2 direction = rb.position.x > playerRb.position.x ? Vector2.left : Vector2.right;
             playerRb.AddForce(direction * knockback, ForceMode2D.Impulse);
 
-            // deals damage FIXME: dont allow it to go into negatives
+            // deals damage TODO: dont allow it to go into negatives
             GameObject.Find("GUI").GetComponent<GUIController>().health -= 10f;
             GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation();
         }
