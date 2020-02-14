@@ -26,5 +26,7 @@ public class Projectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D coll) {
         if (!coll.gameObject.CompareTag("Projectile") && !coll.gameObject.CompareTag("Attack"))
             Destroy(gameObject);
+        if (coll.gameObject.CompareTag("Player"))
+            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation(15f);
     }
 }

@@ -14,8 +14,10 @@ public class PlayerMovement : MonoBehaviour
     private float speed = 0.1f;
     [SerializeField]
     private float jumpHeight = 1.0f;
+    [SerializeField]
+    private const int JUMPS_MAX = 2;
 
-    private bool canDoubleJump;
+    private int jumpsLeft;
     private bool grounded = true;
     private bool jumpInputted;
     private bool crouching;
@@ -37,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
+        jumpsLeft = JUMPS_MAX;
+
     }
     
     // Update is called once per frame
@@ -54,24 +58,32 @@ public class PlayerMovement : MonoBehaviour
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
 
-        if (Input.GetKeyDown(KeyCode.W)) {
-            jumpInputted = true;
+        if (Input.GetKeyDown(KeyCode.W) && jumpsLeft != 0) {
+            //jumpInputted = true;
+            --jumpsLeft;
+            rb.velocity = Vector2.up * jumpHeight;
         }
 
-        
-        if (Input.GetKey(KeyCode.S) && grounded) {
-            crouching = true;
+        if (Input.GetKey(KeyCode.S)) {
+            if(grounded) {
+                crouching = true;
 
-            if (sr.sprite == leftSprite) {
-                sr.sprite = leftCrouchSprite;
-            }
-            else if (sr.sprite == rightSprite) {
-                sr.sprite = rightCrouchSprite;
-            }
+                if (sr.sprite == leftSprite) {
+                    sr.sprite = leftCrouchSprite;
+                }
+                else if (sr.sprite == rightSprite) {
+                    sr.sprite = rightCrouchSprite;
+                }
 
-            gameObject.GetComponent<BoxCollider2D>().size.Set(1.28f, 0.72f);
+                gameObject.GetComponent<BoxCollider2D>().size.Set(1.28f, 0.72f);
+            }
         }
-        else {
+
+        if (Input.GetKeyDown(KeyCode.S) && !grounded) {
+            rb.velocity = Physics2D.gravity;
+        }
+
+        if (Input.GetKeyUp(KeyCode.S)) {
             crouching = false;
 
             if (sr.sprite == leftCrouchSprite) {
@@ -82,9 +94,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             gameObject.GetComponent<BoxCollider2D>().size.Set(1.28f, 1.28f);
-
         }
-        
 
         if (direction.x < 0) {
             sr.sprite = crouching ? leftCrouchSprite : leftSprite;
@@ -92,18 +102,17 @@ public class PlayerMovement : MonoBehaviour
         else if (direction.x > 0) {
             sr.sprite = crouching ? rightCrouchSprite : rightSprite;
         }
+
     }
 
     private void Move()
     {
-        if (grounded) {
-            canDoubleJump = true;
-        }
 
         // moves left to right
         rb.position += direction * speed;
 
         // does a jump
+        /*
         if (jumpInputted) {
             jumpInputted = false;
             if (grounded) {
@@ -114,19 +123,15 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = Vector2.up * jumpHeight;
             }
         }
-
-        /*
-        if (Input.GetKeyDown(KeyCode.W) && jumpsLeft != 0) {
+        
+        
+        if (jumpInputted && jumpsLeft != 0) {
+            jumpInputted = false;
             jumpsLeft--;
-            rb.velocity = new Vector2(0, jumpHeight);
+            rb.velocity = Vector2.up * jumpHeight;
         }
         
-        if (Input.GetKeyDown(KeyCode.D) && jumpsLeft < 2) {
-            rb.velocity = new Vector2(0, fastFallSpeed);
-        }
         */
-
-
     }
 
 
@@ -135,6 +140,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D coll) {
-        grounded = true;
+        if (coll.CompareTag("Ground")) {
+            grounded = true;
+            jumpsLeft = JUMPS_MAX;
+        }
     }
 }

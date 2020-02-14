@@ -32,10 +32,5 @@ public class JumpModifier : MonoBehaviour
         }
         */
 
-        // does a fast fall
-        if (Input.GetKeyDown(KeyCode.S)) {
-            rb.velocity = Physics2D.gravity;
-        }
-
     }
 }

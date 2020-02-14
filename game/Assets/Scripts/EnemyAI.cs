@@ -21,9 +21,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     private Sprite rightSprite;
 
-    // used to update sprite
-    private float pastPos;
-    private float currentPos;
     // Start is called before the first frame update
     void Awake()
     {
@@ -66,9 +63,8 @@ public class EnemyAI : MonoBehaviour
             Vector2 direction = rb.position.x > playerRb.position.x ? Vector2.left : Vector2.right;
             playerRb.AddForce(direction * knockback, ForceMode2D.Impulse);
 
-            // deals damage TODO: dont allow it to go into negatives
-            GameObject.Find("GUI").GetComponent<GUIController>().health -= 10f;
-            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation();
+            // deals damage
+            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation(10f);
         }
 
         

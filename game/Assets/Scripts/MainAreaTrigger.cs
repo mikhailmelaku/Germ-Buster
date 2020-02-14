@@ -54,14 +54,16 @@ public class MainAreaTrigger : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        float difference = Mathf.Abs(cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize
-            - 12);
-        if (difference > 0.5) {
-        cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize =
-                Mathf.Lerp(cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize, 12, 0.01f);
+        if (other.CompareTag("Player")) {
+            float difference = Mathf.Abs(cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize
+                - 12);
+            if (difference > 0.5) {
+            cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize =
+                    Mathf.Lerp(cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize, 12, 0.01f);
 
-        difference = Mathf.Abs(cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize - 12);
+            difference = Mathf.Abs(cam.gameObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize - 12);
 
+            }
         }
     }
 

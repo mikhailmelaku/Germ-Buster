@@ -45,7 +45,7 @@ public class EnemyLaserMovement : MonoBehaviour
         if (coll.gameObject.CompareTag("Player")) {
             Destroy(gameObject);
             //FIXME: add damage system here
-            GUI.GetComponent<GUIController>().DamageAnimation();
+            GUI.GetComponent<GUIController>().DamageAnimation(10f);
 
             //following line prevents player from getting knocked back way too far
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

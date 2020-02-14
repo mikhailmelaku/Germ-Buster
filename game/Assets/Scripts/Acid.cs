@@ -10,8 +10,7 @@ public class Acid : MonoBehaviour
                 new Vector3(17, -2);
         }
 
-        GameObject.Find("GUI").GetComponent<GUIController>().health -= 10f;
-        GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation();
+        GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation(10f);
 
     }
 }

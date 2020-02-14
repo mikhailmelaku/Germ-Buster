@@ -17,13 +17,15 @@ public class GUIController : MonoBehaviour
     public GameObject healthbar;
     public Image healthbarImage;
     public float health = 100f; // player health
-    
+    private int lives = 3;
+
     public GameObject transitionScreen;
     public Image transitionScreenImage;
     private float transitionSeconds = 3f;
 
     private RectTransform rectangle;
     private float maxHealth, minHealth;
+    private bool done = true;
 
     void Awake() {
         rectangle = healthbar.GetComponent<RectTransform>();
@@ -37,25 +39,27 @@ public class GUIController : MonoBehaviour
         healthbarImage = healthbar.GetComponent<Image>();
     }
 
-    public void DamageAnimation() {
+    public void DamageAnimation(float damage) {
 
+        health -= damage;
         health = health < 0 ? 0 : health;
 
         float width = Mathf.Abs(maxHealth - minHealth);
 
         // this is code that updates gui to reflect current health.
-        if (health >= 0) {
+        if (health > 0) {
             rectangle.sizeDelta = new Vector2(width * health / 100, rectangle.sizeDelta.y);
+            Debug.Log("health is: " + health);
         }
-        else {
+        else if (health - 0 < 0.001f) {
             Debug.Log("game over");
-            //TODO: make a game over / restart screen.
+            GameObject.Find("PauseGUI").GetComponent<PauseMenu>().GameOver();
         }
-        
-        Debug.Log("health is: " + health);
-        
+
     }
 
+    // TODO: can use coroutine for transition to second part of level 1
+   
     public void Transition() {
         StartCoroutine(AnimateTransition(transitionSeconds));
     }
@@ -70,5 +74,10 @@ public class GUIController : MonoBehaviour
             yield return new WaitForSeconds(time / 100);
         }
         SceneManager.LoadScene("Level1");
+    }
+
+    public void LoseLife() {
+        if (lives != 0)
+            lives--;
     }
 }
