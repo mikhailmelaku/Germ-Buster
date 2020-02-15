@@ -35,7 +35,7 @@ public class PlayerAttack : MonoBehaviour
     private void GetAttackInput()
     {
 
-        if (Input.GetButtonDown("Fire3") && !cooldown) // Press Left Shift
+        if (Input.GetKeyDown(KeyCode.Space) && !cooldown) // Press Left Shift
         {
             cooldown = true;
 

@@ -54,6 +54,8 @@ public class GUIController : MonoBehaviour
         else if (health - 0 < 0.001f) {
             Debug.Log("game over");
             GameObject.Find("PauseGUI").GetComponent<PauseMenu>().GameOver();
+            rectangle.sizeDelta = new Vector2(width, rectangle.sizeDelta.y);
+            health = 100f;
         }
 
     }
@@ -77,7 +79,15 @@ public class GUIController : MonoBehaviour
     }
 
     public void LoseLife() {
-        if (lives != 0)
+        if (lives != 0) {
             lives--;
+            Debug.Log("you got " + lives + " lives left");
+        }
+
+        if (lives == 0) {
+            Debug.Log("you lose.");
+        }
+        // todo: what happens when you lose? title screen? level select?
+        // todo: return to beginning of level and reset progress?
     }
 }

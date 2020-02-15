@@ -54,10 +54,14 @@ public class AttackMovement : MonoBehaviour
         if (coll.gameObject.CompareTag("Enemy")) {
             Destroy(coll.gameObject);
         }
+        else if (coll.gameObject.CompareTag("MultiHit")) {
+            coll.gameObject.GetComponent<SpawnerScript>().LoseLife();
+        }
 
         if (!coll.gameObject.CompareTag("Player")) {
         Destroy(gameObject);
         }
+
     }
 
 }

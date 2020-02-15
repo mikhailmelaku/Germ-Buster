@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 335072335910816459}
   - component: {fileID: 335072335910816458}
   - component: {fileID: 335072335910816457}
+  - component: {fileID: -5935146245638184487}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: MultiHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,3 +332,22 @@ CompositeCollider2D:
       - {x: -3.425488, y: -2.8791761}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
+--- !u!114 &-5935146245638184487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335072335910816470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ca5da9bfcda4e4fb255249556df1d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 0
+  maxEnemies: 0
+  cooldown: 0
+  enemy1: {fileID: 8921959437226124305, guid: e5cc6a2a61b964d278c95b412ce4f903, type: 3}
+  enemy2: {fileID: 2891416713976793504, guid: b15ed7b0ea53f43ee872005e916d1923, type: 3}
+  player: {fileID: 807805065680397937, guid: 88c55c8c2cb68487eb44ba6097704e30, type: 3}
+  wall: {fileID: 2195019350654216765, guid: 4cb745b731de14c75a60b26bdc21dbb0, type: 3}

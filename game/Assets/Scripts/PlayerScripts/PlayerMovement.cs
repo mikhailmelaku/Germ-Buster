@@ -58,13 +58,13 @@ public class PlayerMovement : MonoBehaviour
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
 
-        if (Input.GetKeyDown(KeyCode.W) && jumpsLeft != 0) {
+        if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && jumpsLeft != 0) {
             //jumpInputted = true;
             --jumpsLeft;
             rb.velocity = Vector2.up * jumpHeight;
         }
 
-        if (Input.GetKey(KeyCode.S)) {
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
             if(grounded) {
                 crouching = true;
 
@@ -79,11 +79,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.S) && !grounded) {
+        if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && !grounded) {
             rb.velocity = Physics2D.gravity;
         }
 
-        if (Input.GetKeyUp(KeyCode.S)) {
+        if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) {
             crouching = false;
 
             if (sr.sprite == leftCrouchSprite) {

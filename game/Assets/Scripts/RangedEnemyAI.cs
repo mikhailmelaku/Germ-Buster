@@ -51,6 +51,7 @@ public class RangedEnemyAI : MonoBehaviour
             FireShots();
             nextFire = Time.time + fireRate;
         }
+
     }
 
 
@@ -79,13 +80,14 @@ public class RangedEnemyAI : MonoBehaviour
     private void UpdateTrajectory() {
 
         playerPosition = playerRb.position;
-        distance = CartesianDistance(playerPosition, rb.position);
+        distance = Distance(playerPosition, rb.position);
         withinFiringRange = proximityRadius > distance;
 
+        
     }
 
     //just the distance formula
-    private float CartesianDistance(Vector2 point1, Vector2 point2) {
+    private float Distance(Vector2 point1, Vector2 point2) {
 
         float xDist = point1.x - point2.x;
         float yDist = point1.y - point2.y;
@@ -94,5 +96,6 @@ public class RangedEnemyAI : MonoBehaviour
         
         return Mathf.Sqrt(xDist + yDist);
     }
+
 
 }

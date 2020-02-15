@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private const float DISTANCE_TO_CAMERA_EDGE = 14f;
+    private const float DISTANCE_TO_CAMERA_EDGE = 15f;
 
     [SerializeField]
     private float speed = 0.05f; // enemy's movement speed
@@ -31,8 +31,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
+    void FixedUpdate() {
         MoveIn();
     }
 
@@ -64,7 +63,7 @@ public class EnemyAI : MonoBehaviour
             playerRb.AddForce(direction * knockback, ForceMode2D.Impulse);
 
             // deals damage
-            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation(10f);
+            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation(7.5f);
         }
 
         
