@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 335072335910816458}
   - component: {fileID: 335072335910816457}
   - component: {fileID: -5935146245638184487}
+  - component: {fileID: 7034067095341757274}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: MultiHit
@@ -347,7 +348,34 @@ MonoBehaviour:
   lives: 0
   maxEnemies: 0
   cooldown: 0
+  offset: 0
   enemy1: {fileID: 8921959437226124305, guid: e5cc6a2a61b964d278c95b412ce4f903, type: 3}
   enemy2: {fileID: 2891416713976793504, guid: b15ed7b0ea53f43ee872005e916d1923, type: 3}
   player: {fileID: 807805065680397937, guid: 88c55c8c2cb68487eb44ba6097704e30, type: 3}
   wall: {fileID: 2195019350654216765, guid: 4cb745b731de14c75a60b26bdc21dbb0, type: 3}
+--- !u!61 &7034067095341757274
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335072335910816470}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -2.4060116, y: -0.10221678}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 1.92}
+    newSize: {x: 2.56, y: 1.92}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.0882902, y: 1.7155663}
+  m_EdgeRadius: 0

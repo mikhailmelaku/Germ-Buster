@@ -12,9 +12,17 @@ public class WallScript : MonoBehaviour
     private Sprite sp2;
     [SerializeField]
     private Sprite sp3;
+    [SerializeField]
+    private Sprite spLastWallOpen;
+
+    private SpriteRenderer sr;
 
     [SerializeField]
-    private SpriteRenderer sr;
+    private GameObject lastWall;
+    
+    void Awake() {
+        sr = gameObject.GetComponent<SpriteRenderer>();
+    }
 
     public void DamageWall() {
         gameObject.GetComponent<CompositeCollider2D>().offset += new Vector2(2, 0);
@@ -29,6 +37,10 @@ public class WallScript : MonoBehaviour
             case "WallSpriteSheet_2":
                 sr.sprite = sp3;
                 gameObject.GetComponent<CompositeCollider2D>().enabled = false;
+                break;
+            case "WallSpriteSheet_3":
+                lastWall.GetComponent<SpriteRenderer>().sprite = spLastWallOpen;
+                lastWall.GetComponent<CompositeCollider2D>().enabled = false;
                 break;
         }
     }

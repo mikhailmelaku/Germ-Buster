@@ -53,10 +53,25 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
     }
-
+    /*TODO TODO TODO this cant be most efficient way of doing this
+     * changes sprite to standing sprite then changes to crouch sprite. the whole time
+     * player is pressing S to crouch, sprite is changing back an forth
+     * TODO if game is lagging suspect this
+     */
     private void GetMovementInput()
     {
         direction = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+
+        if (direction.x < 0)
+        {
+            //sr.sprite = crouching ? leftCrouchSprite : leftSprite;
+            sr.sprite = leftSprite;
+        }
+        else if (direction.x > 0)
+        {
+            //sr.sprite = crouching ? rightCrouchSprite : rightSprite;
+            sr.sprite = rightSprite;
+        }
 
         if ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow)) && jumpsLeft != 0) {
             //jumpInputted = true;
@@ -65,18 +80,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) {
-            if(grounded) {
-                crouching = true;
-
-                if (sr.sprite == leftSprite) {
-                    sr.sprite = leftCrouchSprite;
-                }
-                else if (sr.sprite == rightSprite) {
-                    sr.sprite = rightCrouchSprite;
-                }
-
-                gameObject.GetComponent<BoxCollider2D>().size.Set(1.28f, 0.72f);
-            }
+            Crouch();
         }
 
         if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && !grounded) {
@@ -84,25 +88,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if (Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)) {
-            crouching = false;
-
-            if (sr.sprite == leftCrouchSprite) {
-                sr.sprite = leftSprite;
-            }
-            else if (sr.sprite == rightCrouchSprite) {
-                sr.sprite = rightSprite;
-            }
-
-            gameObject.GetComponent<BoxCollider2D>().size.Set(1.28f, 1.28f);
+            Stand();
         }
-
-        if (direction.x < 0) {
-            sr.sprite = crouching ? leftCrouchSprite : leftSprite;
-        }
-        else if (direction.x > 0) {
-            sr.sprite = crouching ? rightCrouchSprite : rightSprite;
-        }
-
+        
+        
+        
     }
 
     private void Move()
@@ -134,6 +124,40 @@ public class PlayerMovement : MonoBehaviour
         */
     }
 
+    private void Crouch() {
+        if (grounded)
+        {
+            crouching = true;
+
+            if (sr.sprite == leftSprite)
+            {
+                sr.sprite = leftCrouchSprite;
+            }
+            else if (sr.sprite == rightSprite)
+            {
+                sr.sprite = rightCrouchSprite;
+            }
+
+            gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.28f, 0.72f);
+            gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0f, -0.26f);
+        }
+    }
+
+    private void Stand() {
+        crouching = false;
+
+        if (sr.sprite == leftCrouchSprite)
+        {
+            sr.sprite = leftSprite;
+        }
+        else if (sr.sprite == rightCrouchSprite)
+        {
+            sr.sprite = rightSprite;
+        }
+
+        gameObject.GetComponent<BoxCollider2D>().size = new Vector2(1.28f, 1.28f);
+        gameObject.GetComponent<BoxCollider2D>().offset = new Vector2(0f, 0f);
+    }
 
     void OnTriggerExit2D(Collider2D coll) {
         grounded = false;
@@ -145,4 +169,5 @@ public class PlayerMovement : MonoBehaviour
             jumpsLeft = JUMPS_MAX;
         }
     }
+
 }

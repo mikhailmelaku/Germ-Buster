@@ -59,6 +59,6 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue() {
         animator.SetBool("isOpen", false);
 
-        SceneManager.LoadScene("StomachLevel");
+        SceneManager.LoadScene("Level1");
     }
 }

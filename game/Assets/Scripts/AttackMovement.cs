@@ -25,23 +25,16 @@ public class AttackMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
 
-        switch (player.GetComponent<SpriteRenderer>().sprite.name) {
-            case "PlayerSpriteSheet_0":
-                direction = Vector2.left;
-                break;
-            default:
-                direction = Vector2.right;
-                break;
+        if (player.GetComponent<SpriteRenderer>().sprite.name == "PlayerSpriteSheet_0" ||
+            player.GetComponent<SpriteRenderer>().sprite.name == "playerSpriteSheetCrouch_0") {
+            direction = Vector2.left;
+        }
+        else {
+            direction = Vector2.right;
         }
 
         rb.velocity = direction * attackSpeed;
         DestroyAttack(attackDuration);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void DestroyAttack(float delay)

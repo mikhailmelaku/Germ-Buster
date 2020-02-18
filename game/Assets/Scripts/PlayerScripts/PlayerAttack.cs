@@ -39,13 +39,11 @@ public class PlayerAttack : MonoBehaviour
         {
             cooldown = true;
 
-            switch (sr.sprite.name) {
-                case "PlayerSpriteSheet_0":
-                    spawnOffset = Vector3.left;
-                    break;
-                default:
-                    spawnOffset = Vector3.right;
-                    break;
+            if (sr.sprite.name == "playerSpriteSheetCrouch_0" || sr.sprite.name == "PlayerSpriteSheet_0") {
+                spawnOffset = Vector2.left;
+            }
+            else {
+                spawnOffset = Vector2.right;
             }
 
             Instantiate(attack, transform.position + spawnOffset, transform.rotation);

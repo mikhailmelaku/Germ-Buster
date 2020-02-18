@@ -14,8 +14,9 @@ public class SpawnerScript : MonoBehaviour
     private int currEnemies;
     private float range = 15f;
     private float nextSpawn;
-    
 
+    [SerializeField]
+    private float offset;
     [SerializeField]
     private GameObject enemy1;
     [SerializeField]
@@ -28,7 +29,7 @@ public class SpawnerScript : MonoBehaviour
     private Vector3 spawnPosition;
 
     private void Awake() {
-        spawnPosition = new Vector3(transform.position.x - 6, transform.position.y);
+        spawnPosition = new Vector3(transform.position.x + offset, transform.position.y);
     }
 
     public void LoseLife() {
@@ -41,18 +42,21 @@ public class SpawnerScript : MonoBehaviour
         }
     }
 
-    private void Update() {
-        float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
-        if (currEnemies < maxEnemies) {
-            if (distance < range) {
+    private void OnTriggerStay2D(Collider2D other) {
+        //float distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
+        if (other.gameObject.CompareTag("Player")) {
+            if (currEnemies < maxEnemies) {
+        
                 if (Time.time > nextSpawn) {
                     Instantiate(enemy1).transform.position = spawnPosition;
                     Instantiate(enemy2).transform.position = spawnPosition;
                     currEnemies += 2;
                     nextSpawn = Time.time + cooldown;
                 }
+            
             }
         }
+
     }
 
 }
