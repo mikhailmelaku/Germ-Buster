@@ -12,6 +12,11 @@ using UnityEngine.SceneManagement;
 
 public class GUIController : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject lifeCount;
+    [SerializeField]
+    private Sprite[] lifeSprites;
+
     public GameObject interfaceDisplay;
 
     public GameObject healthbar;
@@ -82,10 +87,12 @@ public class GUIController : MonoBehaviour
         if (lives != 0) {
             lives--;
             Debug.Log("you got " + lives + " lives left");
+            lifeCount.GetComponent<Image>().sprite = lifeSprites[lives];
         }
 
         if (lives == 0) {
             Debug.Log("you lose.");
+            lifeCount.GetComponent<Image>().sprite = lifeSprites[3]; 
         }
         // todo: what happens when you lose? title screen? level select?
         // todo: return to beginning of level and reset progress?
