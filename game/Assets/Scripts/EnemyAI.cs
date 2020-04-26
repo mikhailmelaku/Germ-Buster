@@ -4,71 +4,71 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    private const float DISTANCE_TO_CAMERA_EDGE = 15f;
 
     [SerializeField]
     private float speed = 0.05f; // enemy's movement speed
-    [SerializeField]
-    private float knockback = 1.0f; // determines how far the enemy knocks the player back
+    private float vision = DISTANCE_TO_CAMERA_EDGE;
+    private float knockback = 5f; // how hard the enemy hits
+    private float distance;
 
-    private bool touching; // prevents enemy from moving if its touching the player
-
-    private Vector2 playerPosition;
-    private Rigidbody2D rb;
     private Rigidbody2D playerRb;
-    private Collider2D playerCollider;
+    private Rigidbody2D rb;
+    private SpriteRenderer sr;
+
+    [SerializeField]
+    private Sprite leftSprite;
+    [SerializeField]
+    private Sprite rightSprite;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        playerRb = GameObject.Find("Player").GetComponent<Rigidbody2D>();
-        rb = GetComponent<Rigidbody2D>();
-        playerCollider = GameObject.Find("Player").GetComponent<Collider2D>();
-        touching = playerCollider.IsTouching(GetComponent<Collider2D>());
+        rb = gameObject.GetComponent<Rigidbody2D>();
+        playerRb = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
 
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        UpdateTrajectory();
+    void FixedUpdate() {
         MoveIn();
-        MeleeAttack();
     }
 
-    private void MoveIn()
-    {
+    private void MoveIn() {
+        if (!rb.IsTouching(playerRb.GetComponent<BoxCollider2D>())) {
+            distance = Mathf.Abs(rb.position.x - playerRb.position.x);
+            if (distance <= vision) {
+                distance = rb.position.x - playerRb.position.x;
+                // update sprite to look left/right
+                if (distance < 0) {
+                    sr.sprite = rightSprite;
+                }
+                else {
+                    sr.sprite = leftSprite;
+                }
+
+                // move
+                rb.position +=
+                    (playerRb.position - rb.position).normalized * speed;
+            }
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D coll) {
         
-        if (!touching)
-        {
-            // make vector point towards the player and apply that to position
+        if (coll.gameObject.CompareTag("Player")) {
+            // knockback effect
+            Vector2 direction = rb.position.x > playerRb.position.x ? Vector2.left : Vector2.right;
+            playerRb.AddForce(direction * knockback, ForceMode2D.Impulse);
 
-            rb.position +=
-                (playerPosition - rb.position).normalized * speed;
-       
+            // deals damage
+            GameObject.Find("GUI").GetComponent<GUIController>().DamageAnimation(7.5f);
         }
 
+        
     }
 
-    private void UpdateTrajectory()
-    {
-        if (!touching) {
-            playerPosition = playerRb.position;
-        }
-    }
+  
 
-    private void MeleeAttack() {
-        if (touching) {
-            playerRb.AddForce(Vector2.left);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D coll)
-    {
-        touching = coll.gameObject.name == "Player";
-    }
-
-    private void OnCollisionExit2D(Collision2D coll)
-    {
-        touching = false;
-    }
 }

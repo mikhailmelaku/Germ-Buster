@@ -14,7 +14,6 @@ public class AttackMovement : MonoBehaviour
 
     public static float attackSpeed = 10.0f;
 
-    private string[] EnemyList = { "RangedEnemy", "Enemy" };
     private Rigidbody2D rb;
     
     private Vector2 direction;
@@ -26,23 +25,16 @@ public class AttackMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindWithTag("Player");
 
-        switch (player.GetComponent<SpriteRenderer>().sprite.name) {
-            case "PlayerSpriteSheet_0":
-                direction = Vector2.left;
-                break;
-            default:
-                direction = Vector2.right;
-                break;
+        if (player.GetComponent<SpriteRenderer>().sprite.name == "PlayerSpriteSheet_0" ||
+            player.GetComponent<SpriteRenderer>().sprite.name == "playerSpriteSheetCrouch_0") {
+            direction = Vector2.left;
+        }
+        else {
+            direction = Vector2.right;
         }
 
         rb.velocity = direction * attackSpeed;
         DestroyAttack(attackDuration);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     private void DestroyAttack(float delay)
@@ -52,14 +44,17 @@ public class AttackMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        if (!coll.gameObject.CompareTag("Player")) {
-            foreach (string enemyName in EnemyList) {
-                if (coll.gameObject.name == enemyName) {
-                    Destroy(coll.gameObject);
-                }
-            }
-            Destroy(gameObject);
+        if (coll.gameObject.CompareTag("Enemy")) {
+            Destroy(coll.gameObject);
         }
+        else if (coll.gameObject.CompareTag("MultiHit")) {
+            coll.gameObject.GetComponent<SpawnerScript>().LoseLife();
+        }
+
+        if (!coll.gameObject.CompareTag("Player")) {
+        Destroy(gameObject);
+        }
+
     }
 
 }

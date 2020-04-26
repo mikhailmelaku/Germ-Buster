@@ -8,6 +8,6 @@ public class LevelTransition : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.CompareTag("Player")) 
-            GUI.GetComponent<GUIController>().Transition();
+            GUI.GetComponent<GUIController>().Transition("DemoEnd");
     }
 }

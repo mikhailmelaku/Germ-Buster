@@ -20,7 +20,9 @@ public class JumpModifier : MonoBehaviour
     }
 
 
-    void FixedUpdate() {
+    void Update() {
+
+        // tapping jump gives you a smaller jump, holding gives you a bigger one
         /*
         if (rb.velocity.y < 0) {
             rb.velocity += Vector2.up * Physics2D.gravity.y * fallMultiplier * Time.deltaTime;
@@ -29,11 +31,6 @@ public class JumpModifier : MonoBehaviour
             rb.velocity += Vector2.up * Physics2D.gravity.y * lowJumpMultiplier * Time.deltaTime;
         }
         */
-
-        // does a fast fall
-        if (Input.GetKeyDown(KeyCode.S)) {
-            rb.velocity = Physics2D.gravity;
-        }
 
     }
 }

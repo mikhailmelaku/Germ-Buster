@@ -35,17 +35,15 @@ public class PlayerAttack : MonoBehaviour
     private void GetAttackInput()
     {
 
-        if (Input.GetButtonDown("Fire3") && !cooldown) // Press Left Shift
+        if (Input.GetKeyDown(KeyCode.Space) && !cooldown) // Press Left Shift
         {
             cooldown = true;
 
-            switch (sr.sprite.name) {
-                case "PlayerSpriteSheet_0":
-                    spawnOffset = Vector3.left;
-                    break;
-                default:
-                    spawnOffset = Vector3.right;
-                    break;
+            if (sr.sprite.name == "playerSpriteSheetCrouch_0" || sr.sprite.name == "PlayerSpriteSheet_0") {
+                spawnOffset = Vector2.left;
+            }
+            else {
+                spawnOffset = Vector2.right;
             }
 
             Instantiate(attack, transform.position + spawnOffset, transform.rotation);
@@ -55,7 +53,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameObject.Find("GUI").GetComponent<PauseMenu>().PauseGame();
+            GameObject.Find("PauseGUI").GetComponent<PauseMenu>().PauseGame();
         }
 
     }

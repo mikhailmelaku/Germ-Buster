@@ -15,6 +15,8 @@ public class EnemyLaserMovement : MonoBehaviour
     private float attackSpeed = 1.25f;
     [SerializeField]
     private float attackDuration = 1.5f; // attack duartion in seconds
+    [SerializeField]
+    private float damage = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -43,7 +45,7 @@ public class EnemyLaserMovement : MonoBehaviour
         if (coll.gameObject.CompareTag("Player")) {
             Destroy(gameObject);
             //FIXME: add damage system here
-            GUI.GetComponent<GUIController>().DamageAnimation();
+            GUI.GetComponent<GUIController>().DamageAnimation(10f);
 
             //following line prevents player from getting knocked back way too far
             player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
