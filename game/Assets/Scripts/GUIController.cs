@@ -42,6 +42,9 @@ public class GUIController : MonoBehaviour
         interfaceDisplay = GameObject.Find("GUI");
         healthbar = interfaceDisplay.transform.GetChild(1).gameObject;
         healthbarImage = healthbar.GetComponent<Image>();
+
+        transitionScreen = interfaceDisplay.transform.GetChild(6).gameObject;
+        transitionScreenImage = transitionScreen.GetComponent<Image>();
     }
 
     public void DamageAnimation(float damage) {
@@ -67,11 +70,11 @@ public class GUIController : MonoBehaviour
 
     // TODO: can use coroutine for transition to second part of level 1
    
-    public void Transition() {
-        StartCoroutine(AnimateTransition(transitionSeconds));
+    public void Transition(string levelName) {
+        StartCoroutine(AnimateTransition(transitionSeconds, levelName));
     }
 
-    private IEnumerator AnimateTransition(float time) {
+    private IEnumerator AnimateTransition(float time, string levelName) {
 
         float rate = 1 / time;
         Color tempColor = new Color(0, 0, 0, rate);
@@ -80,7 +83,7 @@ public class GUIController : MonoBehaviour
             transitionScreenImage.color += tempColor;
             yield return new WaitForSeconds(time / 100);
         }
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(levelName);
     }
 
     public void LoseLife() {
@@ -92,7 +95,8 @@ public class GUIController : MonoBehaviour
 
         if (lives == 0) {
             Debug.Log("you lose.");
-            lifeCount.GetComponent<Image>().sprite = lifeSprites[3]; 
+            lifeCount.GetComponent<Image>().sprite = lifeSprites[3];
+            SceneManager.LoadScene("TitleScreen");
         }
         // todo: what happens when you lose? title screen? level select?
         // todo: return to beginning of level and reset progress?

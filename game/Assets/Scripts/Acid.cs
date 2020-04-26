@@ -9,7 +9,7 @@ public class Acid : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player")) {
 
-            if (health > 10) {
+            if (health > 10 || health - 10 < 0.0001) {
             other.gameObject.GetComponent<Rigidbody2D>().position =
                 new Vector3(17, -2);
             }
